@@ -5,26 +5,31 @@
 using namespace std;
 
 int main() {
-	int length, lanterns;
-	cin >> lanterns >> length;
+	int n, t;
+	cin >> n >> t;
 
-	vector<int> positions(lanterns);
-	for (int i = 0; i < lanterns; i++) {
-		cin >> positions[i];
+	vector<int> books(n);
+	for (int i = 0; i < n; i++) {
+		cin >> books[i];
 	}
 
-	sort(positions.begin(), positions.end());
+	//code
+	int max_books = 0, sum = 0;
+	int left = 0, right = 0;
 
-	double maxGap = 0;
-	for (int i = 0; i < lanterns - 1; i++) {
-		maxGap = max(maxGap, (positions[i + 1] - positions[i]) / 2.0);
+	while (right < n) {
+		sum += books[right];
+		
+		while (sum > t) {
+			sum -= books[left];
+			left++;
+		}
+
+		max_books = max(max_books, right - left + 1);
+		right++;
 	}
 
-	double edgeLeft = positions[0];
-	double edgeRight = length - positions.back();
+	cout << max_books;
 
-	double ans = max({maxGap, edgeLeft, edgeRight});
-
-	cout << fixed << setprecision(10) << ans;
 	return 0;
 }
