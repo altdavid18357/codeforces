@@ -3,6 +3,10 @@
 #include <cmath>
 using namespace std;
 
+/*
+key idea = always use long long when you have a really really big number - i.e 10^7 usually. otherwise the computer can't handle it - in addition, ceiling and floor operator are useful.
+*/
+
 int main() {
 	long long n, m, a;
 
